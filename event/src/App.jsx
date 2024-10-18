@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
 
+  // Input armazena o valor e setInput armazena o estado
   const [input1, setInput1] = useState('') //CEP
   const [input2, setInput2] = useState('') //NUM
   const [input3, setInput3] = useState('') //ENDERECO
@@ -18,13 +19,13 @@ function App() {
   }
 
   const preencheForm = (endereco) => {
-    setInput3(endereco.logradouro)
-    setInput4(endereco.bairro)
-    setInput5(endereco.localidade)
-    setInput6(endereco.uf)
+    setInput3(endereco.logradouro) // Rua
+    setInput4(endereco.bairro) // Bairro
+    setInput5(endereco.localidade) // Cidade
+    setInput6(endereco.uf) // Estado
   }
 
-  const verifyNumber = (num) => /^[0-9]+$/.test(num)
+  const verifyNumber = (num) => /^[0-9]+$/.test(num) // Testa se número é válido
 
   const cepValido = (cep) => cep.length == 8 && verifyNumber(cep)
 
@@ -36,16 +37,16 @@ function App() {
 
     if(cepValido(cep)) {
       const dados = await fetch(url)
-      const addres = await dados.json()
+      const addres = await dados.json() // Espera os dados
 
-      console.log(addres)
+      console.log(addres) // Retorna os dados como JSON
 
       if(addres.hasOwnProperty('erro')) {
         alert('CEP não encontrado')
       }
 
       else {
-        preencheForm(addres)
+        preencheForm(addres) // Preenche form automaticamente
       }
     }
 
